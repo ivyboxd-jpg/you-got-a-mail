@@ -11,10 +11,9 @@
             --ios-grey: #8E8E93;
             --ios-bg: #F2F2F7;
             --ios-border: #D1D1D6;
-            --ios-white: #FFFFFF;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
         body, html { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro", Helvetica, Arial, sans-serif; background-color: white; height: 100%; overflow: hidden; }
 
         /* --- LOGIN & T&C --- */
@@ -22,11 +21,11 @@
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: #fff; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px;
         }
-        #tc-page { display: none; z-index: 10000; overflow-y: auto; align-items: flex-start; justify-content: flex-start; background: #f9f9f9; }
-        .login-logo { width: 80px; height: 80px; margin-bottom: 20px; border-radius: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        #tc-page { display: none; z-index: 10000; overflow-y: auto; align-items: flex-start; justify-content: flex-start; background: #fff; padding-top: 60px; }
+        .login-logo { width: 80px; height: 80px; margin-bottom: 20px; border-radius: 18px; }
         .login-title { font-size: 28px; font-weight: 700; margin: 0; letter-spacing: -0.5px; }
-        .login-btn { width: 100%; max-width: 300px; padding: 16px; background: var(--ios-blue); color: white; border: none; border-radius: 12px; font-size: 17px; font-weight: 600; margin-top: 40px; cursor: pointer; }
-        .tc-link { color: var(--ios-blue); font-size: 13px; margin-top: 20px; text-decoration: none; }
+        .login-btn { width: 100%; max-width: 320px; padding: 16px; background: var(--ios-blue); color: white; border: none; border-radius: 12px; font-size: 17px; font-weight: 600; margin-top: 40px; cursor: pointer; }
+        .tc-link { color: var(--ios-blue); font-size: 14px; margin-top: 25px; text-decoration: none; font-weight: 500; }
 
         /* --- SIDEBAR --- */
         #sidebar { position: fixed; left: -100%; top: 0; width: 85%; height: 100%; background: var(--ios-bg); transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 3000; padding-top: 50px; }
@@ -37,41 +36,41 @@
         .m-count { margin-left: auto; color: var(--ios-grey); }
 
         /* --- HEADER & PROFILE --- */
-        header { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); padding: 10px 16px; border-bottom: 0.5px solid var(--ios-border); position: sticky; top: 0; z-index: 1000; }
+        header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); padding: 10px 16px; border-bottom: 0.5px solid var(--ios-border); position: sticky; top: 0; z-index: 1000; }
         .nav-row { display: flex; justify-content: space-between; align-items: center; height: 44px; }
-        .mailbox-btn { color: var(--ios-blue); font-size: 17px; cursor: pointer; }
+        .mailbox-btn { color: var(--ios-blue); font-size: 17px; cursor: pointer; font-weight: 400; }
         
-        .profile-trigger { width: 34px; height: 34px; border-radius: 50%; overflow: hidden; border: 0.5px solid var(--ios-border); }
+        .profile-trigger { width: 34px; height: 34px; border-radius: 50%; overflow: hidden; border: 0.5px solid var(--ios-border); background: #eee; }
         .profile-trigger img { width: 100%; height: 100%; object-fit: cover; }
         
         #profile-box { 
-            display: none; position: absolute; top: 55px; right: 16px; width: 220px; 
-            background: white; border-radius: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
-            padding: 20px; z-index: 2001; text-align: center; border: 0.5px solid var(--ios-border);
+            display: none; position: absolute; top: 55px; right: 16px; width: 240px; 
+            background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); 
+            padding: 24px; z-index: 2001; text-align: center; border: 0.5px solid var(--ios-border);
         }
-        .profile-email { font-size: 12px; color: var(--ios-grey); display: block; margin-bottom: 12px; }
-        .profile-box-img { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 10px; display: block; object-fit: cover; }
-        .profile-hi { font-weight: 600; font-size: 16px; margin: 0; }
+        .profile-email { font-size: 13px; color: var(--ios-grey); display: block; margin-bottom: 12px; text-transform: lowercase; }
+        .profile-box-img { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 12px; display: block; object-fit: cover; border: 1px solid #f0f0f0; }
+        .profile-hi { font-weight: 700; font-size: 18px; margin: 0; color: #000; }
 
-        /* --- LISTS --- */
+        /* --- SEARCH & LIST --- */
         .search-wrap { background: rgba(118, 118, 128, 0.12); border-radius: 10px; padding: 10px 12px; margin: 10px 16px; display: flex; align-items: center; }
-        .search-wrap input { border: none; background: transparent; outline: none; width: 100%; font-size: 17px; margin-left: 8px; }
+        .search-wrap input { border: none; background: transparent; width: 100%; font-size: 17px; margin-left: 8px; }
         
         .email-list-container { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        .email-item { padding: 12px 16px; border-bottom: 0.5px solid var(--ios-border); cursor: pointer; position: relative; background: #fff; }
-        .unread-dot { position: absolute; left: 8px; top: 20px; width: 8px; height: 8px; background: var(--ios-blue); border-radius: 50%; }
+        .email-item { padding: 14px 16px; border-bottom: 0.5px solid var(--ios-border); cursor: pointer; position: relative; background: #fff; }
+        .unread-dot { position: absolute; left: 8px; top: 24px; width: 8px; height: 8px; background: var(--ios-blue); border-radius: 50%; }
         .email-row { display: flex; justify-content: space-between; padding-left: 14px; }
-        .sender { font-weight: 700; font-size: 17px; }
-        .subject { font-weight: 600; font-size: 15px; padding-left: 14px; margin: 2px 0; }
-        .preview { color: var(--ios-grey); font-size: 14px; padding-left: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; }
+        .sender { font-weight: 700; font-size: 17px; color: #000; text-transform: lowercase; }
+        .subject { font-weight: 600; font-size: 15px; padding-left: 14px; margin: 2px 0; color: #000; text-transform: lowercase; }
+        .preview { color: var(--ios-grey); font-size: 14px; padding-left: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4; text-transform: lowercase; }
 
         /* --- DETAIL VIEW --- */
-        #detail-view { position: fixed; top: 0; left: 100%; width: 100%; height: 100%; background: white; z-index: 4000; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; }
+        #detail-view { position: fixed; top: 0; left: 100%; width: 100%; height: 100%; background: white; z-index: 4000; transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; }
         #detail-view.active { left: 0; }
-        .detail-header { padding: 10px 16px; border-bottom: 0.5px solid var(--ios-border); display: flex; align-items: center; height: 50px; position: sticky; top: 0; background: #fff; }
+        .detail-header { padding: 10px 16px; border-bottom: 0.5px solid var(--ios-border); display: flex; align-items: center; height: 50px; position: sticky; top: 0; background: #fff; z-index: 10; }
         .detail-body { padding: 25px 20px; }
-        .detail-subject { font-size: 24px; font-weight: 700; margin-bottom: 15px; }
-        .detail-content { font-size: 17px; line-height: 1.6; color: #222; white-space: pre-wrap; margin-top: 20px; border-top: 0.5px solid #eee; padding-top: 20px; }
+        .detail-subject { font-size: 24px; font-weight: 700; margin-bottom: 15px; letter-spacing: -0.5px; text-transform: lowercase; }
+        .detail-content { font-size: 17px; line-height: 1.6; color: #333; white-space: pre-wrap; margin-top: 20px; padding-top: 20px; border-top: 0.5px solid #eee; text-transform: lowercase; }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 2500; }
         .overlay.active { display: block; }
@@ -79,38 +78,40 @@
 </head>
 <body>
 
-<!-- Login -->
+<!-- Login Page -->
 <div id="login-page">
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" class="login-logo">
     <h1 class="login-title">Mail</h1>
-    <p style="color:var(--ios-grey); margin-top:10px;">aaradhya@lovedbyniv.com</p>
+    <p style="color:var(--ios-grey); margin-top:10px; font-size:17px;">aaradhya@lovedbyniv.com</p>
     <button class="login-btn" onclick="login()">Sign In</button>
     <a href="#" class="tc-link" onclick="toggleTC(true)">Terms & Conditions</a>
 </div>
 
-<!-- T&C -->
+<!-- T&C Page -->
 <div id="tc-page">
-    <h1 style="font-size:24px;">Terms of Affection</h1>
-    <p style="font-size:14px; color:#555; line-height:1.6;">
-        <b>1. governing law</b><br>these terms are governed by the laws of our constant facetimes and the silent moments where we just exist together on call.<br><br>
-        <b>2. user obligations</b><br>the user (aaradhya) is contractually obligated to drink at least one glass of water every 2 hours during exam season. failure to comply results in a mandatory 5-minute vent session.<br><br>
-        <b>3. limitation of liability</b><br>niv is not liable for any sudden bursts of happiness caused by unexpected "i love you" emails. this is a known feature, not a bug.<br><br>
-        <b>4. termination</b><br>this agreement cannot be terminated. the distance is physical; the connection is permanent.<br><br>
-        <b>5. exam clause</b><br>your worth is not calculated by your gpa. any thoughts to the contrary are a violation of these terms.
-    </p>
-    <button class="login-btn" onclick="toggleTC(false)">i agree</button>
+    <div style="padding-bottom: 40px;">
+        <h1 style="font-size:32px; font-weight:800; margin-bottom:20px;">Terms of Affection</h1>
+        <div style="font-size:16px; color:#333; line-height:1.7;">
+            <p><b>1. jurisdiction</b><br>these terms are governed exclusively by the high court of our 2 am phone calls. distance is recognized as a physical inconvenience, not a legal barrier.</p>
+            <p><b>2. user maintenance</b><br>you are strictly required to take a break from your books every 90 minutes. excessive caffeine intake without a corresponding water intake is a breach of contract.</p>
+            <p><b>3. liability</b><br>niv is not liable for any sudden smiles caused by these emails. all "i love you" messages are provided on an "as-is" basis and are guaranteed to be 100% sincere.</p>
+            <p><b>4. absurdity clause</b><br>niv reserves the right to send nonsensical messages just to make you roll your eyes. roll of eyes must be followed by a smile to satisfy the agreement.</p>
+            <p><b>5. exams policy</b><br>exams are a temporary assessment of memory. your value is an permanent assessment of how incredible you are. the latter takes precedence.</p>
+        </div>
+        <button class="login-btn" style="margin-top:30px; max-width:100%;" onclick="toggleTC(false)">i agree</button>
+    </div>
 </div>
 
-<!-- Main App -->
+<!-- App Container -->
 <div id="app-container" style="display:none; height:100%; flex-direction:column;">
     <div id="sidebar">
         <h2 style="font-size:34px; margin:0 16px 20px; font-weight:700;">Mailboxes</h2>
         <div class="mailbox-list">
-            <a href="#" class="mailbox-item" onclick="setBox('inbox')"><i class="fa-solid fa-inbox"></i> inbox <span class="m-count">10</span></a>
-            <a href="#" class="mailbox-item" onclick="setBox('vip')"><i class="fa-solid fa-star" style="color:#FFCC00"></i> vip <span class="m-count">8</span></a>
-            <a href="#" class="mailbox-item" onclick="setBox('sent')"><i class="fa-solid fa-paper-plane"></i> sent <span class="m-count">4</span></a>
-            <a href="#" class="mailbox-item" onclick="setBox('junk')"><i class="fa-solid fa-box-archive"></i> junk <span class="m-count">4</span></a>
-            <a href="#" class="mailbox-item" onclick="setBox('bin')"><i class="fa-solid fa-trash"></i> bin <span class="m-count">4</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('Inbox')"><i class="fa-solid fa-inbox"></i> Inbox <span class="m-count">10</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('VIP')"><i class="fa-solid fa-star" style="color:#FFCC00"></i> VIP <span class="m-count">8</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('Sent')"><i class="fa-solid fa-paper-plane"></i> Sent <span class="m-count">4</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('Junk')"><i class="fa-solid fa-box-archive"></i> Junk <span class="m-count">4</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('Bin')"><i class="fa-solid fa-trash"></i> Bin <span class="m-count">4</span></a>
         </div>
     </div>
 
@@ -118,10 +119,11 @@
 
     <header>
         <div class="nav-row">
-            <div class="mailbox-btn" onclick="toggleSidebar()"><i class="fa-solid fa-chevron-left"></i> mailboxes</div>
+            <div class="mailbox-btn" onclick="toggleSidebar()"><i class="fa-solid fa-chevron-left"></i> Mailboxes</div>
             <div class="profile-container">
                 <div class="profile-trigger" onclick="toggleProfile()">
-                    <img src="https://upload.wikimedia.org/wikipedia/en/3/36/Lorelai_Gilmore.jpg">
+                    <!-- Stable Lorelai Gilmore link from Wikipedia/Public CDN -->
+                    <img src="https://upload.wikimedia.org/wikipedia/en/3/36/Lorelai_Gilmore.jpg" alt="PFP">
                 </div>
                 <div id="profile-box">
                     <span class="profile-email">aaradhya@lovedbyniv.com</span>
@@ -130,29 +132,29 @@
                 </div>
             </div>
         </div>
-        <h1 id="view-title" style="font-size: 34px; font-weight: 700; margin: 12px 0 8px;">inbox</h1>
+        <h1 id="view-title" style="font-size: 34px; font-weight: 700; margin: 12px 0 8px;">Inbox</h1>
     </header>
 
     <div class="search-wrap">
         <i class="fa-solid fa-magnifying-glass" style="color:#8E8E93; font-size:14px;"></i>
-        <input type="text" id="searchInput" placeholder="search" onkeyup="handleSearch()">
+        <input type="text" id="searchInput" placeholder="Search" onkeyup="handleSearch()">
     </div>
 
     <div class="email-list-container" id="email-list"></div>
 </div>
 
-<!-- Detail -->
+<!-- Email Detail -->
 <div id="detail-view">
     <div class="detail-header">
-        <div class="mailbox-btn" onclick="closeEmail()"><i class="fa-solid fa-chevron-left"></i> back</div>
+        <div class="mailbox-btn" onclick="closeEmail()"><i class="fa-solid fa-chevron-left"></i> Back</div>
     </div>
     <div class="detail-body">
         <div class="detail-subject" id="d-subject"></div>
         <div style="display:flex; align-items:center;">
             <div style="width:40px; height:40px; border-radius:50%; background:var(--ios-blue); color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; margin-right:12px;">N</div>
             <div>
-                <div style="font-weight:700;">niv</div>
-                <div style="color:var(--ios-grey); font-size:14px;">to: aaradhya</div>
+                <div style="font-weight:700; font-size:17px; text-transform: lowercase;">niv</div>
+                <div style="color:var(--ios-grey); font-size:14px; text-transform: lowercase;">to: aaradhya</div>
             </div>
         </div>
         <div class="detail-content" id="d-content"></div>
@@ -161,41 +163,41 @@
 
 <script>
     const emails = {
-        'inbox': [
-            { sender: 'niv', subject: 'stitch misses you', time: '9:41 am', preview: 'he sat by the phone today while we talked...', content: 'stitch has started doing this thing where he sits right next to the phone whenever he hears your voice. i think he misses having you on the screen. he spent ten minutes staring at the spot where your face usually is. it made me realize how much of a constant you are here, even from a distance.' },
-            { sender: 'niv', subject: 'exams don\'t define you', time: '8:22 am', preview: 'i know the stress is hitting a peak right now...', content: 'i know you are buried in books, but i want to remind you that your worth has nothing to do with a test score. you are intelligent and capable regardless of what happens in that exam hall. just do what you can. i am proud of the effort.' },
-            { sender: 'niv', subject: 'morning voice', time: 'yesterday', preview: 'hearing your sleepy morning voice today was...', content: 'hearing your sleepy voice this morning was the highlight of my day. it makes the miles feel non-existent for a few minutes. i wish i could just hand you a coffee.' },
-            { sender: 'niv', subject: 'study break reminder', time: 'yesterday', preview: 'go get some water and stretch for five minutes...', content: 'you have been at your desk for too long. please go get some water and stretch. the books will still be there when you get back. your brain needs a reset.' },
-            { sender: 'niv', subject: 'the facetime snapshot', time: 'wednesday', preview: 'i still remember exactly where i was during our first call...', content: 'i still have that mental picture of you from the first time we facetimed. i was so nervous, but then you smiled and everything just clicked.' },
-            { sender: 'niv', subject: 'appreciation post', time: 'tuesday', preview: 'i don\'t say it enough, but i really appreciate you...', content: 'i really appreciate how you make time for us even when your schedule is falling apart. i don\'t take that for granted.' },
-            { sender: 'niv', subject: 'counting down', time: 'monday', preview: 'i looked at flight tickets today just for fun...', content: 'i spent a while looking at flights today. just seeing the destination next to your name makes the gap feel smaller.' },
-            { sender: 'niv', subject: 'your laugh', time: 'sunday', preview: 'that one joke you told made me realize...', content: 'the way you laugh when you\'re actually tired is my favorite sound. thank you for being yourself with me, even when you\'re stressed.' },
-            { sender: 'niv', subject: 'playlist update', time: 'oct 18', preview: 'added three new songs that reminded me of you...', content: 'i updated our shared playlist. there is one specific track by the end that reminds me of that story you told me.' },
-            { sender: 'niv', subject: 'just proud of you', time: 'oct 17', preview: 'no reason, just wanted to say it out loud...', content: 'no specific reason for this email, just wanted to say i\'m proud of how you\'re handling everything lately.' }
+        'Inbox': [
+            { sender: 'niv', subject: 'stitch misses you', time: '9:41 am', preview: 'he sat by the phone today while we talked...', content: 'stitch has started doing this thing where he sits right next to the phone whenever he hears your voice. i think he misses having you on the screen. he spent ten minutes staring at the spot where your face usually is after we hung up. it made me realize how much of a constant you are in my home, even from a distance.' },
+            { sender: 'niv', subject: 'exams don\'t define you', time: '8:22 am', preview: 'i know the stress is hitting a peak right now...', content: 'i know you are buried in books and the pressure feels heavy, but i want to remind you that your worth has nothing to do with a test score. you are intelligent, capable, and hardworking regardless of what happens in that exam hall. just do what you can. i am proud of you for the effort, not the result.' },
+            { sender: 'niv', subject: 'morning voice', time: 'yesterday', preview: 'hearing your sleepy morning voice today was...', content: 'hearing your sleepy voice this morning was the highlight of my day. it makes the 3000 miles feel non-existent for a few minutes. i wish i could just hand you a coffee and tell you you\'ve got this.' },
+            { sender: 'niv', subject: 'study break reminder', time: 'yesterday', preview: 'go get some water and stretch for five minutes...', content: 'you have been at your desk for too long. please go get some water and stretch. the books will still be there when you get back. your brain needs a reset, and i need you to stay healthy.' },
+            { sender: 'niv', subject: 'the facetime snapshot', time: 'wednesday', preview: 'i still remember exactly where i was during our first call...', content: 'i still have that mental picture of you from the first time we facetimed. i was so nervous to finally see your face "live," but then you smiled and everything just clicked. it feels like i\'ve known you forever, even if we\'ve only met through a screen.' },
+            { sender: 'niv', subject: 'appreciation post', time: 'tuesday', preview: 'i don\'t say it enough, but i really appreciate you...', content: 'i don\'t say it enough, but i really appreciate how you make time for us even when your schedule is falling apart. you manage to be a source of calm for me while dealing with your own chaos. i don\'t take that for granted.' },
+            { sender: 'niv', subject: 'counting down', time: 'monday', preview: 'i looked at flight tickets today just for fun...', content: 'i spent a while looking at flights today. just seeing the destination next to your name makes the gap feel smaller. one day soon, we won\'t have to say goodbye through a phone.' },
+            { sender: 'niv', subject: 'your laugh', time: 'sunday', preview: 'that one joke you told made me realize...', content: 'the way you laugh when you\'re actually tired is my favorite sound. it\'s so genuine. thank you for being yourself with me, even when you\'re stressed.' },
+            { sender: 'niv', subject: 'playlist update', time: 'oct 18', preview: 'added three new songs that reminded me of you...', content: 'i updated our shared playlist. there is one specific track by the end that reminds me of that story you told me about your childhood. listen to it when you need a break from studying.' },
+            { sender: 'niv', subject: 'just proud of you', time: 'oct 17', preview: 'no reason, just wanted to say it out loud...', content: 'no specific reason for this email, just wanted to say i\'m proud of how you\'re handling everything lately. you\'re stronger than you give yourself credit for.' }
         ],
-        'vip': [
-            { sender: 'niv', subject: 'priority status', time: '10:15 am', preview: 'you are the only person on this list for a reason...', content: 'you are the only contact that can bypass my settings. if you need me, i am answering. you are my highest priority, always.' },
-            { sender: 'niv', subject: 'my safe space', time: 'yesterday', preview: 'talking to you feels like coming home...', content: 'no matter how chaotic the world gets, our calls are my safe space. i can be 100% myself with you.' },
-            { sender: 'niv', subject: 'a small promise', time: 'oct 15', preview: 'i promise to stay in your corner through it all...', content: 'i promise to keep showing up, even when things are messy. you don\'t have to handle the heavy stuff alone.' },
-            { sender: 'niv', subject: 'reliability', time: 'oct 14', preview: 'i want to be the person you lean on...', content: 'i want to be the one you go to when everything else is falling apart. i\'m here for the good days and the bad ones.' },
-            { sender: 'niv', subject: 'first impressions', time: 'oct 12', preview: 'what i thought when we first started talking...', content: 'i remember thinking after our first long call that i hadn\'t felt that connected to someone in a long time.' },
-            { sender: 'niv', subject: 'future coffee dates', time: 'oct 10', preview: 'imagining us in a real cafe instead of over video...', content: 'i spent some time today imagining us sitting in a real cafe. it\'s going to happen, and it\'s going to be perfect.' },
-            { sender: 'niv', subject: 'personality traits', time: 'oct 8', preview: 'the things i love about how your mind works...', content: 'i love how your mind works. your wit always leaves me impressed. you are so much more than just a beautiful face.' },
-            { sender: 'niv', subject: 'long term', time: 'oct 5', preview: 'i see you in my future, aaradhya...', content: 'i don\'t do anything half-way. when i say i\'m here for you, i mean for the long haul.' }
+        'VIP': [
+            { sender: 'niv', subject: 'priority status', time: '10:15 am', preview: 'you are the only person on this list for a reason...', content: 'you are the only contact that can bypass my do not disturb settings. if you need me, i am answering. you are my highest priority, always.' },
+            { sender: 'niv', subject: 'my safe space', time: 'yesterday', preview: 'talking to you feels like coming home...', content: 'no matter how chaotic the world gets, our calls are my safe space. i can be 100% myself with you, and that is a rare thing to find.' },
+            { sender: 'niv', subject: 'a small promise', time: 'oct 15', preview: 'i promise to stay in your corner through it all...', content: 'i promise to keep showing up, even when things are messy. you don\'t have to handle the heavy stuff alone. i am right here.' },
+            { sender: 'niv', subject: 'reliability', time: 'oct 14', preview: 'i want to be the person you lean on...', content: 'i want to be the one you go to when everything else is falling apart. i\'m here for the good days, but i\'m more here for the bad ones.' },
+            { sender: 'niv', subject: 'first impressions', time: 'oct 12', preview: 'what i thought when we first started talking...', content: 'i remember thinking after our first long call that i hadn\'t felt that connected to someone in a long time. i\'m so glad i was right.' },
+            { sender: 'niv', subject: 'future coffee dates', time: 'oct 10', preview: 'imagining us in a real cafe instead of over video...', content: 'i spent some time today imagining us sitting in a real cafe instead of drinking coffee over a camera. it\'s going to happen, and it\'s going to be perfect.' },
+            { sender: 'niv', subject: 'personality traits', time: 'oct 8', preview: 'the things i love about how your mind works...', content: 'i love how your mind works. your wit and your perspective on things always leave me impressed. you are so much more than just a beautiful face.' },
+            { sender: 'niv', subject: 'long term', time: 'oct 5', preview: 'i see you in my future, aaradhya...', content: 'i don\'t do anything half-way. when i say i\'m here for you, i mean for the long haul. i\'m excited for everything we haven\'t done yet.' }
         ],
-        'sent': [
+        'Sent': [
             { sender: 'niv', subject: 're: talk soon?', time: '12:00 pm', preview: 'just sent this while you were sleeping...', content: 'i sent this while you were asleep just so you could wake up to a reminder that you\'re loved.' },
             { sender: 'niv', subject: 'good luck today', time: '8:00 am', preview: 'kick those exams in the face...', content: 'sent a little extra luck your way for today\'s session. you\'ve got this.' },
             { sender: 'niv', subject: 'did you eat?', time: 'monday', preview: 'checking in on your dinner...', content: 'just checking to make sure you aren\'t surviving on just caffeine today.' },
             { sender: 'niv', subject: 'miss you already', time: 'sunday', preview: 'literally just hung up but...', content: 'i literally just hung up the phone but i already miss hearing you.' }
         ],
-        'junk': [
+        'Junk': [
             { sender: 'system', subject: 'anxiety filter', time: '1:00 pm', preview: 'moving all your exam worries here...', content: 'i am taking all your exam anxieties and moving them here. they don\'t belong in your head.' },
             { sender: 'distance', subject: '3000 miles', time: 'yesterday', preview: 'blocked: irrelevant notification...', content: 'the distance tried to send a reminder that we are far apart. i marked it as junk.' },
             { sender: 'self-doubt', subject: 'not enough', time: 'oct 14', preview: 'discarded: you are doing great...', content: 'any thought that tells you that you aren\'t doing enough is being redirected here.' },
             { sender: 'comparison', subject: 'others are ahead', time: 'oct 12', preview: 'deleted: stay on your own path...', content: 'don\'t look at what anyone else is doing. you are winning your own race.' }
         ],
-        'bin': [
+        'Bin': [
             { sender: 'trash', subject: 'bad mood', time: '9:00 am', preview: 'discarding the rough moments...', content: 'i am throwing away the memory of any bad day you had this week. tomorrow is fresh.' },
             { sender: 'insecurities', subject: 'old thoughts', time: 'yesterday', preview: 'permanently deleted...', content: 'that version of you that thinks she isn\'t enough? moved to the bin.' },
             { sender: 'silence', subject: 'pre-us era', time: 'oct 5', preview: 'discarding the days before we met...', content: 'life was too quiet before we started talking. i prefer this noise.' },
@@ -208,7 +210,7 @@
     function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('overlay').classList.toggle('active'); }
     function toggleProfile() { const b = document.getElementById('profile-box'); b.style.display = (b.style.display === 'block') ? 'none' : 'block'; }
     
-    let currentBox = 'inbox';
+    let currentBox = 'Inbox';
     function setBox(name) { currentBox = name; document.getElementById('view-title').innerText = name; renderEmails(); toggleSidebar(); }
 
     function renderEmails(filter = "") {
