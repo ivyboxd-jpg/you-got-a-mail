@@ -12,100 +12,115 @@
             --ios-bg: #F2F2F7;
             --ios-border: #D1D1D6;
             --ios-white: #FFFFFF;
+            --system-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body, html {
             margin: 0; padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--system-font);
             background-color: var(--ios-white);
             height: 100%; overflow: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- LOGIN PAGE --- */
+        /* --- LOGIN PAGE (GLASSMORPHISM) --- */
         #login-page {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            height: 100%; background: #fff; z-index: 5000; position: relative;
+            height: 100%; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            z-index: 9999; position: fixed; width: 100%; transition: opacity 0.5s ease;
         }
-        .login-logo { width: 80px; height: 80px; margin-bottom: 20px; }
-        .login-title { font-size: 24px; font-weight: 600; margin-bottom: 30px; }
-        .login-input {
-            width: 280px; padding: 12px; border: 1px solid var(--ios-border);
-            border-radius: 8px; margin-bottom: 15px; font-size: 16px; outline: none;
+        .login-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 80%; max-width: 320px;
         }
+        .login-logo { width: 60px; height: 60px; margin-bottom: 20px; border-radius: 12px; }
+        .login-title { font-size: 22px; font-weight: 600; margin-bottom: 10px; color: #1c1c1e; }
+        .login-subtitle { font-size: 14px; color: var(--ios-grey); margin-bottom: 30px; }
         .login-btn {
-            width: 280px; padding: 12px; background: var(--ios-blue);
-            color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer;
+            width: 100%; padding: 14px; background: var(--ios-blue);
+            color: white; border: none; border-radius: 12px; font-size: 17px; font-weight: 600; cursor: pointer;
+            transition: background 0.2s;
         }
+        .login-btn:active { background: #0056b3; }
 
         /* --- SIDEBAR / MAILBOXES --- */
         #sidebar {
             position: fixed; left: -100%; top: 0; width: 85%; height: 100%;
-            background: var(--ios-bg); transition: 0.3s ease; z-index: 3000;
-            padding-top: 20px; box-shadow: 10px 0 20px rgba(0,0,0,0.1);
+            background: var(--ios-bg); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            z-index: 3000; padding-top: 20px;
         }
-        #sidebar.open { left: 0; }
-        .mailbox-list { background: white; border-radius: 12px; margin: 0 16px; overflow: hidden; }
+        #sidebar.open { transform: translateX(100%); }
+        .mailbox-list { background: white; border-radius: 12px; margin: 20px 16px; overflow: hidden; }
         .mailbox-item {
             display: flex; align-items: center; padding: 12px 16px;
             text-decoration: none; color: black; border-bottom: 0.5px solid #E5E5EA; font-size: 17px;
         }
-        .mailbox-item i { width: 25px; margin-right: 12px; color: var(--ios-blue); text-align: center; }
+        .mailbox-item i { width: 28px; font-size: 18px; color: var(--ios-blue); margin-right: 12px; }
+        .mail-count { margin-left: auto; color: var(--ios-grey); font-size: 17px; }
 
-        /* --- MAIN APP VIEW --- */
-        #app-container { display: none; height: 100%; }
+        /* --- MAIN VIEW --- */
+        #app-container { display: none; height: 100%; flex-direction: column; }
         header {
-            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px);
             padding: 10px 16px; border-bottom: 0.5px solid var(--ios-border);
             position: sticky; top: 0; z-index: 1000;
         }
         .nav-row { display: flex; justify-content: space-between; align-items: center; }
-        .mailbox-btn { color: var(--ios-blue); font-size: 17px; cursor: pointer; }
+        .mailbox-btn { color: var(--ios-blue); font-size: 17px; cursor: pointer; display: flex; align-items: center; }
 
-        /* --- PROFILE BOX (TOP RIGHT) --- */
+        /* --- PROFILE DROPDOWN (CENTERED) --- */
         .profile-container { position: relative; }
         .profile-trigger {
             width: 32px; height: 32px; border-radius: 50%;
-            background: #E5E5EA; overflow: hidden; cursor: pointer;
+            overflow: hidden; cursor: pointer; border: 0.5px solid var(--ios-border);
         }
         .profile-trigger img { width: 100%; height: 100%; object-fit: cover; }
 
         #profile-box {
-            display: none; position: absolute; top: 40px; right: 0;
-            width: 200px; background: white; border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15); border: 0.5px solid var(--ios-border);
-            padding: 15px; z-index: 2001; text-align: center;
+            display: none; position: absolute; top: 45px; right: 0;
+            width: 220px; background: white; border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); border: 0.5px solid var(--ios-border);
+            padding: 20px; z-index: 2001; animation: slideIn 0.2s ease-out; text-align: center;
         }
-        .profile-email { font-size: 11px; color: var(--ios-grey); margin-bottom: 8px; text-transform: lowercase; }
-        .profile-box-img { width: 50px; height: 50px; border-radius: 50%; margin: 0 auto 10px; display: block; object-fit: cover; }
-        .profile-hi { font-weight: 600; font-size: 15px; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .profile-email { font-size: 12px; color: var(--ios-grey); margin-bottom: 12px; font-weight: 500; }
+        .profile-box-img { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 12px; display: block; object-fit: cover; }
+        .profile-hi { font-weight: 600; font-size: 16px; color: #000; margin: 0; }
 
-        /* --- SEARCH & LIST --- */
-        .search-section { padding: 10px 16px; }
-        .search-wrap { background: #E3E3E8; border-radius: 10px; padding: 8px 10px; display: flex; align-items: center; }
+        /* --- EMAIL LIST --- */
+        .search-section { padding: 8px 16px; }
+        .search-wrap { background: rgba(118, 118, 128, 0.12); border-radius: 10px; padding: 8px 12px; display: flex; align-items: center; }
         .search-wrap input { border: none; background: transparent; outline: none; width: 100%; font-size: 17px; margin-left: 8px; }
 
-        .email-item { padding: 12px 16px; border-bottom: 0.5px solid var(--ios-border); cursor: pointer; position: relative; }
-        .unread-dot { position: absolute; left: 6px; top: 20px; width: 8px; height: 8px; background: var(--ios-blue); border-radius: 50%; }
-        .email-row1 { display: flex; justify-content: space-between; padding-left: 10px; }
+        .email-list-container { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .email-item { padding: 12px 16px; border-bottom: 0.5px solid var(--ios-border); cursor: pointer; position: relative; background: #fff; }
+        .unread-dot { position: absolute; left: 8px; top: 22px; width: 8px; height: 8px; background: var(--ios-blue); border-radius: 50%; }
+        .email-row1 { display: flex; justify-content: space-between; padding-left: 14px; }
         .sender { font-weight: 700; font-size: 17px; }
         .time { color: var(--ios-grey); font-size: 15px; }
-        .subject { font-weight: 600; font-size: 15px; padding-left: 10px; margin: 2px 0; }
-        .preview { color: var(--ios-grey); font-size: 14px; padding-left: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .subject { font-weight: 600; font-size: 15px; padding-left: 14px; margin: 2px 0; }
+        .preview { color: var(--ios-grey); font-size: 14px; padding-left: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
         /* --- DETAIL VIEW --- */
         #detail-view {
             position: fixed; top: 0; left: 100%; width: 100%; height: 100%;
-            background: white; z-index: 4000; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: white; z-index: 4000; transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             overflow-y: auto;
         }
-        #detail-view.active { left: 0; }
-        .detail-header { padding: 10px 16px; border-bottom: 0.5px solid var(--ios-border); display: flex; align-items: center; position: sticky; top: 0; background: white; }
-        .detail-body { padding: 20px 16px; }
-        .detail-subject { font-size: 22px; font-weight: 700; margin-bottom: 15px; }
-        .detail-sender-name { font-weight: 700; }
-        .detail-content { line-height: 1.5; font-size: 17px; color: #333; margin-top: 20px; white-space: pre-wrap; }
+        #detail-view.active { transform: translateX(-100%); }
+        .detail-header { padding: 10px 16px; border-bottom: 0.5px solid var(--ios-border); display: flex; align-items: center; background: white; position: sticky; top: 0; }
+        .detail-body { padding: 30px 20px; }
+        .detail-subject { font-size: 26px; font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+        .detail-meta { display: flex; align-items: center; margin-bottom: 30px; }
+        .detail-niv-icon { width: 44px; height: 44px; background: var(--ios-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; font-size: 18px; }
+        .detail-content { line-height: 1.6; font-size: 17px; color: #333; white-space: pre-wrap; }
 
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); z-index: 2500; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 2500; }
         .overlay.active { display: block; }
     </style>
 </head>
@@ -113,23 +128,26 @@
 
 <!-- Login Page -->
 <div id="login-page">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" class="login-logo">
-    <div class="login-title">Sign in to Mail</div>
-    <input type="text" class="login-input" placeholder="Email" value="aaradhya@lovedbyniv.com" readonly>
-    <button class="login-btn" onclick="login()">Sign In</button>
+    <div class="login-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mail_%28iOS%29.svg" class="login-logo">
+        <div class="login-title">Sign in to Mail</div>
+        <div class="login-subtitle">Securely connect to your inbox</div>
+        <input type="text" class="login-input" style="width: 100%; padding: 14px; border: 1px solid var(--ios-border); border-radius: 12px; margin-bottom: 12px; font-size: 17px; outline: none; background: #fff; box-sizing: border-box;" value="aaradhya@lovedbyniv.com" readonly>
+        <button class="login-btn" onclick="login()">Continue</button>
+    </div>
 </div>
 
 <!-- Main App -->
 <div id="app-container">
     <div id="sidebar">
-        <div style="padding: 0 16px 15px;"><h2 style="font-size:34px; margin:0;">Mailboxes</h2></div>
+        <div style="padding: 0 16px 15px;"><h2 style="font-size:34px; margin:0; font-weight:700;">Mailboxes</h2></div>
         <div class="mailbox-list">
-            <a href="#" class="mailbox-item" onclick="setBox('Inbox')"><i class="fa-solid fa-inbox"></i> Inbox</a>
-            <a href="#" class="mailbox-item" onclick="setBox('VIP')"><i class="fa-solid fa-star"></i> VIP</a>
-            <a href="#" class="mailbox-item" onclick="setBox('Junk')"><i class="fa-solid fa-box-archive"></i> Junk</a>
-            <a href="#" class="mailbox-item" onclick="setBox('Bin')"><i class="fa-solid fa-trash"></i> Bin</a>
-            <a href="#" class="mailbox-item" onclick="setBox('All Mail')"><i class="fa-solid fa-envelope"></i> All Mail</a>
-            <a href="#" class="mailbox-item" onclick="setBox('Spam')"><i class="fa-solid fa-triangle-exclamation"></i> Spam</a>
+            <a href="#" class="mailbox-item" onclick="setBox('Inbox')"><i class="fa-solid fa-inbox"></i> Inbox <span class="mail-count">10</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('VIP')"><i class="fa-solid fa-star" style="color:#FFCC00"></i> VIP <span class="mail-count">8</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('Junk')"><i class="fa-solid fa-box-archive"></i> Junk <span class="mail-count">4</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('Bin')"><i class="fa-solid fa-trash"></i> Bin <span class="mail-count">4</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('All Mail')"><i class="fa-solid fa-envelopes-bulk"></i> All Mail <span class="mail-count">26</span></a>
+            <a href="#" class="mailbox-item" onclick="setBox('Spam')"><i class="fa-solid fa-triangle-exclamation" style="color:#FF9500"></i> Spam <span class="mail-count">4</span></a>
         </div>
     </div>
 
@@ -140,16 +158,16 @@
             <div class="mailbox-btn" onclick="toggleSidebar()"><i class="fa-solid fa-chevron-left"></i> Mailboxes</div>
             <div class="profile-container">
                 <div class="profile-trigger" onclick="toggleProfile()">
-                    <img src="https://share.google/yPsc3xmCwIKhSWvBc" onerror="this.src='https://ui-avatars.com/api/?name=Aaradhya&background=007AFF&color=fff'">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/3/36/Lorelai_Gilmore.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Lorelai&background=007AFF&color=fff'">
                 </div>
                 <div id="profile-box">
                     <div class="profile-email">aaradhya@lovedbyniv.com</div>
-                    <img src="https://share.google/yPsc3xmCwIKhSWvBc" class="profile-box-img" onerror="this.src='https://ui-avatars.com/api/?name=Aaradhya&background=007AFF&color=fff'">
-                    <div class="profile-hi">Hi, Aaradhya.</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/3/36/Lorelai_Gilmore.jpg" class="profile-box-img" onerror="this.src='https://ui-avatars.com/api/?name=Lorelai&background=007AFF&color=fff'">
+                    <p class="profile-hi">Hi, Aaradhya.</p>
                 </div>
             </div>
         </div>
-        <h1 id="view-title" style="font-size: 34px; font-weight: 700; margin: 10px 0 5px;">Inbox</h1>
+        <h1 id="view-title" style="font-size: 34px; font-weight: 700; margin: 12px 0 8px;">Inbox</h1>
     </header>
 
     <div class="search-section">
@@ -159,7 +177,7 @@
         </div>
     </div>
 
-    <div id="email-list"></div>
+    <div class="email-list-container" id="email-list"></div>
 </div>
 
 <!-- Detail View -->
@@ -169,8 +187,13 @@
     </div>
     <div class="detail-body">
         <div class="detail-subject" id="d-subject"></div>
-        <div class="detail-sender-name">Niv</div>
-        <div style="color:var(--ios-grey); font-size:14px;">To: Aaradhya</div>
+        <div class="detail-meta">
+            <div class="detail-niv-icon">N</div>
+            <div>
+                <div style="font-weight:700; font-size:17px;">Niv</div>
+                <div style="color:var(--ios-grey); font-size:14px;">To: Aaradhya</div>
+            </div>
+        </div>
         <div class="detail-content" id="d-content"></div>
     </div>
 </div>
@@ -179,49 +202,53 @@
     const emails = {
         'Inbox': [
             { sender: 'Niv', subject: 'Stitch misses you', time: '9:41 AM', preview: 'He was sitting by the phone again today while we were talking...', content: 'Stitch has started doing this thing where he sits right next to the phone whenever he hears your voice. I think he misses having you on the screen. He spent about ten minutes staring at the spot where your face usually is after we hung up. It made me realize how much of a constant you are in my home, even from a distance.' },
-            { sender: 'Niv', subject: 'Exams don\'t define you', time: 'Yesterday', preview: 'I know the stress is hitting a peak right now, but please remember...', content: 'I know you are buried in books and the pressure feels heavy, but I want to remind you that your worth has nothing to do with a test score. You are intelligent, capable, and hardworking regardless of what happens in that exam hall. Just do what you can. I am proud of you for the effort, not the result.' },
-            { sender: 'Niv', subject: 'A note on appreciation', time: 'Tuesday', preview: 'I was thinking about how much you handle on a daily basis...', content: 'I don\'t say it enough, but I really appreciate how you make time for us even when your schedule is falling apart. You manage to be a source of calm for me while dealing with your own chaos. I don\'t take that for granted.' },
-            { sender: 'Niv', subject: 'The reality of us', time: 'Monday', preview: 'We haven\'t met in person yet, but it doesn\'t feel that way...', content: 'Sometimes I forget we haven\'t actually sat in the same room. The way we talk and the way you understand me feels more real than most people I see every day. I am grateful that we found a way to bridge the distance.' },
-            { sender: 'Niv', subject: 'Take a breath', time: 'Sunday', preview: 'Just a quick reminder to step away from the desk for a moment...', content: 'You have been working for hours. Please go get some water and stretch. The books will still be there when you get back. Your mental health is more important than finishing one more chapter tonight.' }
+            { sender: 'Niv', subject: 'Exams don\'t define you', time: '8:30 AM', preview: 'I know the stress is hitting a peak right now, but please remember...', content: 'I know you are buried in books and the pressure feels heavy, but I want to remind you that your worth has nothing to do with a test score. You are intelligent, capable, and hardworking regardless of what happens in that exam hall. Just do what you can. I am proud of you for the effort, not the result.' },
+            { sender: 'Niv', subject: 'The FaceTime snapshot', time: 'Yesterday', preview: 'I still have that mental picture of you from the first time we called...', content: 'I still have that mental picture of you from the first time we FaceTimed. I was so nervous to finally see your face "live," but then you smiled and it felt like I\'d known you forever. Even across the miles, you feel so real to me.' },
+            { sender: 'Niv', subject: 'A note on appreciation', time: 'Yesterday', preview: 'I don\'t say it enough, but I really appreciate how you make time for us...', content: 'I don\'t say it enough, but I really appreciate how you make time for us even when your schedule is falling apart. You manage to be a source of calm for me while dealing with your own chaos. I don\'t take that for granted.' },
+            { sender: 'Niv', subject: 'Just checking in', time: 'Tuesday', preview: 'I know you\'ve been busy. I just wanted to tell you I\'m proud of you...', content: 'Hey, I know today was a long haul with the studying. Just checking in to make sure you ate something decent and aren\'t being too hard on yourself. I\'m proud of you.' },
+            { sender: 'Niv', subject: 'Your voice is home', time: 'Monday', preview: 'Even when we have nothing to say, staying on the call is enough...', content: 'It\'s funny how we can just sit on a call in silence while we both work and it still feels like the best part of my day. Your presence, even digital, is enough for me.' },
+            { sender: 'Niv', subject: 'Thinking of you', time: 'Sunday', preview: 'Just a small reminder that someone is always in your corner...', content: 'No matter how stressful things get, remember I\'m right here. I\'m carrying you in my head all day. You got this, Aaradhya.' },
+            { sender: 'Niv', subject: 'The 3000 mile gap', time: 'Friday', preview: 'I looked at a map today and realized how close we really are...', content: 'I was looking at a map today. The distance looks so big on paper, but it feels so small when we\'re talking. We\'re doing it. We\'re making it work.' },
+            { sender: 'Niv', subject: 'Morning coffee thoughts', time: 'Thursday', preview: 'I was drinking coffee and imagined you sitting right across from me...', content: 'I had my coffee today and just spent a few minutes imagining us doing this together in person one day. It\'s a nice thought to start the morning with.' },
+            { sender: 'Niv', subject: 'Stay hydrated', time: 'Wednesday', preview: 'This is your official hydration reminder. Go get some water...', content: 'Official reminder: drink some water. You\'ve been at that desk too long. Take a five minute break for me.' }
         ],
         'VIP': [
-            { sender: 'Niv', subject: 'Priority contact', time: '10:15 AM', preview: 'You are the only person on this list for a reason...', content: 'I made you my only VIP contact. No matter how busy I get, if you need me, I am answering. You always come first.' },
-            { sender: 'Niv', subject: 'Future plans', time: '2 days ago', preview: 'I have a list of things I want to tell you in person...', content: 'There are things that don\'t translate well over a call. I am keeping a mental folder of all the conversations I want to have with you when there isn\'t a screen between us.' },
-            { sender: 'Niv', subject: 'Reliability', time: 'Oct 14', preview: 'I want you to know you can always lean on me...', content: 'Whether it is exam stress or just a bad day, I am a permanent fixture in your life. You don\'t have to carry the heavy stuff by yourself.' },
-            { sender: 'Niv', subject: 'First FaceTime', time: 'Oct 12', preview: 'Looking back at how nervous I was...', content: 'I was thinking about our first call. I was so worried about what to say, but you made it so easy. I knew within five minutes that you were someone special.' },
-            { sender: 'Niv', subject: 'Grateful for you', time: 'Oct 10', preview: 'Just a sincere thank you for being who you are...', content: 'Thank you for being patient with me and for being so open. You make being in a relationship feel natural and easy.' }
+            { sender: 'Niv', subject: 'You\'re my only VIP', time: '10:15 AM', preview: 'No one else gets this priority in my life...', content: 'You are the only person who can bypass my "Do Not Disturb" settings. You are my highest priority, always.' },
+            { sender: 'Niv', subject: 'A small promise', time: '2 days ago', preview: 'I promise to stay in your corner through every bad day...', content: 'I promise to keep showing up, even when things are messy or stressful. You don\'t have to handle the heavy stuff alone.' },
+            { sender: 'Niv', subject: 'Reliability', time: 'Oct 14', preview: 'I want you to know you can always lean on me...', content: 'I want to be the person you go to when everything else is falling apart. I\'m here for the good days, but I\'m more here for the bad ones.' },
+            { sender: 'Niv', subject: 'Why you’re amazing', time: 'Oct 12', preview: 'I made a mental list of all the things I appreciate about you...', content: 'Your resilience, your kindness, the way you care for people—it all makes me so lucky to be with you.' },
+            { sender: 'Niv', subject: 'The "Us" Plan', time: 'Oct 10', preview: 'I wrote down all the places I want to take you one day...', content: 'I have a note on my phone filled with things I want to do with you when we meet. It keeps me going.' },
+            { sender: 'Niv', subject: 'Grateful for you', time: 'Oct 8', preview: 'Just a sincere thank you for being who you are...', content: 'Thank you for being open with me. You make this relationship feel so natural.' },
+            { sender: 'Niv', subject: 'My safest space', time: 'Oct 5', preview: 'Talking to you feels like coming home...', content: 'No matter how chaotic my world is, talking to you makes everything calm down.' },
+            { sender: 'Niv', subject: 'You\'re breathtaking', time: 'Oct 2', preview: 'Every time I see you on my screen, I\'m reminded how lucky I am...', content: 'I know you say you look tired, but you look incredible to me. Every single time.' }
         ],
         'Junk': [
-            { sender: 'System', subject: 'Anxiety filter', time: '1:00 PM', preview: 'Moving all your worries to the junk folder...', content: 'I am taking all your exam anxieties and moving them here. They don\'t belong in your main inbox.' },
-            { sender: 'Distance', subject: 'Too many miles', time: 'Yesterday', preview: 'This notification has been blocked...', content: 'The distance tried to send a reminder that we are far apart. I marked it as junk because it doesn\'t change how I feel.' },
-            { sender: 'Negativity', subject: 'Not enough time', time: 'Monday', preview: 'Filtering out the bad thoughts...', content: 'Any thought that tells you that you aren\'t doing enough is being redirected to this folder.' },
-            { sender: 'Old Habits', subject: 'Silence', time: 'Sunday', preview: 'Discarding the days before I knew you...', content: 'Life was much quieter before we started talking. I prefer the noise of our calls.' },
-            { sender: 'Stress', subject: 'Overthinking', time: 'Saturday', preview: 'Deleted automatically...', content: 'Overthinking about the future is a waste of your energy. We are okay.' }
+            { sender: 'System', subject: 'Anxiety Filter', time: '1:00 PM', preview: 'Moving all your worries to the junk folder...', content: 'I\'m taking all your exam anxieties and moving them here. They don\'t belong in your head.' },
+            { sender: 'Distance', subject: 'Too far apart', time: 'Yesterday', preview: 'This notification has been blocked by Niv...', content: 'Distance tried to tell me we\'re too far. I marked it as junk because it doesn\'t change a thing.' },
+            { sender: 'Self-Doubt', subject: 'Not enough', time: 'Monday', preview: 'Blocked: You are more than enough...', content: 'I\'m deleting any thought that says you aren\'t doing great. You\'re doing amazing.' },
+            { sender: 'Stress', subject: 'Overthinking', time: 'Sunday', preview: 'Automatically deleted...', content: 'Overthinking about the future is a waste of your energy. We\'re okay right now.' }
         ],
         'Bin': [
-            { sender: 'Trash', subject: 'Bad moods', time: '9:00 AM', preview: 'Discarding the rough moments...', content: 'I am throwing away the memory of any bad day you had this week. Tomorrow is a fresh start.' },
-            { sender: 'Deleted', subject: 'Misunderstandings', time: 'Oct 5', preview: 'Cleared from history...', content: 'Any time we didn\'t quite see eye to eye, it\'s gone. Only the good stuff stays.' },
-            { sender: 'Empty', subject: 'Doubts', time: 'Oct 3', preview: 'Permanent deletion confirmed...', content: 'There is no room for doubt here. I am fully committed to you.' },
-            { sender: 'System', subject: 'Exhaustion', time: 'Oct 1', preview: 'Moving tiredness to bin...', content: 'I wish I could take your tired feelings and delete them for you.' },
-            { sender: 'Archive', subject: 'The wait', time: 'Sep 30', preview: 'Throwing away the impatience...', content: 'Waiting to meet is hard, but it will be worth it. Discarding the frustration.' }
+            { sender: 'Trash', subject: 'Bad moods', time: '9:00 AM', preview: 'Discarding the rough moments...', content: 'I\'m throwing away the memory of any bad day you had this week. Tomorrow is a fresh start.' },
+            { sender: 'Old Habits', subject: 'Silence', time: 'Yesterday', preview: 'Discarding the days before I knew you...', content: 'Life was too quiet before we started talking. I\'m glad that version of life is in the bin.' },
+            { sender: 'Deleted', subject: 'Misunderstandings', time: 'Monday', preview: 'Cleared from history...', content: 'Whatever small disagreements we\'ve had, they\'re gone. Only the good stuff stays.' },
+            { sender: 'Insecurity', subject: 'Comparing yourself', time: 'Sunday', preview: 'Permanently deleted...', content: 'Comparing yourself to others is a waste. You\'re on your own path and you\'re winning.' }
         ],
-        'All Mail': [],
         'Spam': [
-            { sender: 'Bot', subject: 'Reminder', time: 'Daily', preview: 'Hydration check...', content: 'This is an automated check to make sure you have had water today. Please take a sip.' },
-            { sender: 'System', subject: 'Load Balance', time: 'Friday', preview: 'Distribution of affection...', content: 'Sending a steady stream of support your way to help balance the exam stress.' },
-            { sender: 'Filter', subject: 'External Noise', time: 'Thursday', preview: 'Blocking out the world...', content: 'Tuning out everything else so I can focus on you.' },
-            { sender: 'Alert', subject: 'Sleep Schedule', time: 'Wednesday', preview: 'Warning: Late night detected...', content: 'You need sleep to function. Please close the books soon.' },
-            { sender: 'Notice', subject: 'Appreciation Overflow', time: 'Tuesday', preview: 'Data limit reached...', content: 'My appreciation for you is exceeding the system capacity.' }
+            { sender: 'Bot', subject: 'Water Reminder', time: 'Daily', preview: 'Drink some water, Aaradhya...', content: 'Go get a glass of water right now. Your brain needs it to finish those exams.' },
+            { sender: 'System', subject: 'Affection Overflow', time: 'Daily', preview: 'Data limit reached...', content: 'My heart\'s server is crashing because I think about you too much. Error: Too much love.' },
+            { sender: 'Filter', subject: 'Negative Noise', time: 'Daily', preview: 'Blocking out the world...', content: 'Tuning out everything else today so I can just focus on you and me.' },
+            { sender: 'Notice', subject: 'Sleep Alert', time: 'Nightly', preview: 'Warning: Late night detected...', content: 'Close the books soon. You need sleep to function. I want you rested.' }
         ]
     };
 
-    emails['All Mail'] = [...emails.Inbox, ...emails.VIP];
-    let currentBox = 'Inbox';
-
     function login() {
-        document.getElementById('login-page').style.display = 'none';
-        document.getElementById('app-container').style.display = 'block';
-        renderEmails();
+        document.getElementById('login-page').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('app-container').style.display = 'flex';
+            renderEmails();
+        }, 500);
     }
 
     function toggleSidebar() {
@@ -234,6 +261,8 @@
         box.style.display = (box.style.display === 'block') ? 'none' : 'block';
     }
 
+    let currentBox = 'Inbox';
+
     function setBox(name) {
         currentBox = name;
         document.getElementById('view-title').innerText = name;
@@ -244,14 +273,18 @@
     function renderEmails(filter = "") {
         const list = document.getElementById('email-list');
         list.innerHTML = "";
-        const data = emails[currentBox];
+        let data = emails[currentBox] || [];
+        if(currentBox === 'All Mail') {
+            data = [...emails.Inbox, ...emails.VIP];
+        }
+
         data.forEach((m, i) => {
             if (m.subject.toLowerCase().includes(filter.toLowerCase())) {
                 const item = document.createElement('div');
                 item.className = 'email-item';
                 item.onclick = () => openEmail(m);
                 item.innerHTML = `
-                    <div class="unread-dot"></div>
+                    ${i < 3 ? '<div class="unread-dot"></div>' : ''}
                     <div class="email-row1"><span class="sender">${m.sender}</span><span class="time">${m.time} ›</span></div>
                     <div class="subject">${m.subject}</div>
                     <div class="preview">${m.preview}</div>
